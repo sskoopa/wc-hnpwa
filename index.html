@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Web Component PWA App Shell Example</title>
+    <link rel="stylesheet" media="all" href="css/main.css"/>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="/" onclick="return route('/');">Home</a>
+      </li>
+      <li>
+        <a href="/page2" onclick="return route('/page2');">Page 2</a>
+      </li>
+      <li>
+        <a href="/products/foo" onclick="return route('/products/foo');">Products: Foo</a>
+      </li>
+      <li>
+        <pushstate-anchor href="/products/bar">products/bar</pushstate-anchor>
+      </li>
+      <li>
+        <a is="pushstate-anchor" href="/products/baz">baz</a>
+        <!-- This only works in Chrome? -->
+      </li>
+    </ul>
+    <app-router mode="pushstate" trailingSlash="ignore">
+      <!-- matches an exact path -->
+      <app-route path="/" import="/pages/home-page.html" template></app-route>
+
+      <!-- matches an exact path -->
+      <app-route path="/page2" import="/pages/page-2.html" template></app-route>
+
+      <!-- matches using a path variable -->
+      <app-route path="/products/:productName" import="/pages/product-name.html"></app-route>
+
+      <!-- matches everything else -->
+      <app-route path="*" import="/pages/not-found-page.html" template></app-route>
+    </app-router>
+    <footer>Footer: PWA Appshell demo with native web components</footer>
+    <script src="scripts/shadow-render.js"></script>
+    <script src="scripts/router.js"></script>
+    <script src="scripts/ps-anchor.js"></script>
+    <script>
+      function route(val, options) {
+        document.querySelector('app-router').go(val, options);
+        return false;
+      }
+    </script>
+  </body>
+</html>

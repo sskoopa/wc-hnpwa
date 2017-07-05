@@ -1,0 +1,13 @@
+ul {
+  background-color: #f99;
+}
+app-route * {
+  background-color: #9f9;
+}
+footer {
+  background-color: #99f;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
